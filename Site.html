@@ -36,27 +36,30 @@
 </body>
 <script>
     var map = L.map('map');
-    map.setView(new L.LatLng(24.957547210362748, 121.24075323625465), 12);
+    map.setView(new L.LatLng(24.957547210362748, 121.24075323625465), 16);
     var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     var osm = new L.TileLayer(osmUrl, {
         minZoom: 8,
-        maxZoom: 16
+        maxZoom: 24
     });
     map.addLayer(osm);
+
+    var marker = L.marker([24.957547210362748, 121.24075323625465]).addTo(map);
+    marker.bindPopup("<strong>中原大學</strong><br>標示的位置。").openPopup();
+   
     map.locate({
-        setView: false, // 是否讓地圖跟著移動中心點
+        setView: true, // 是否讓地圖跟著移動中心點
         watch: true, // 是否要一直監測使用者位置
-        maxZoom: 18, // 最大的縮放值
         enableHighAccuracy: true, // 是否要高精準度的抓位置
         timeout: 10000 // 觸發locationerror事件之前等待的毫秒數
     });
-    map.on('locationfound', foundHandler);
-    var marker = L.marker([24.957547210362748, 121.24075323625465]).addTo(map);
-    marker.bindPopup("<strong>地標</strong><br>標示的位置。").openPopup();
-
+    var self = L.marker([24.957547210362748, 121.24075323625465]).addTo(map);
+    self.bindPopup("<strong>現在位置</strong>").openPopup();
     function foundHandler(e) {
-        marker.setLatLng(e.latlng); // 移動 marker
+        self.setLatLng(e.latlng); // 移動 marker
     }
+
+    map.on('locationfound', foundHandler);
 </script>
 
 </html>
