@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/c5f2e8b9cc.js" crossorigin="anonymous"></script>
+    <!-- vue -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <link href="index.css" rel="stylesheet">
+    <link href="site.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧喜</title>
+</head>
+
+<body>
+    <header>
+        <div style="display: none;">
+            <h2>當前訂單</h2>
+            <p>狀態　　　　　　　外送員正前往領取衣物<br>
+        </div>
+    </header>
+
+    <div class="main">
+        <div id="map"></div>
+    </div>
+
+</body>
+<script>
+    var map = L.map('map');
+    map.setView(new L.LatLng(24.957547210362748, 121.24075323625465), 12);
+    var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    var osm = new L.TileLayer(osmUrl, {
+        minZoom: 8,
+        maxZoom: 16
+    });
+    map.addLayer(osm);
+    map.locate({
+        setView: false, // 是否讓地圖跟著移動中心點
+        watch: true, // 是否要一直監測使用者位置
+        maxZoom: 18, // 最大的縮放值
+        enableHighAccuracy: true, // 是否要高精準度的抓位置
+        timeout: 10000 // 觸發locationerror事件之前等待的毫秒數
+    });
+    map.on('locationfound', foundHandler);
+    var marker = L.marker([24.957547210362748, 121.24075323625465]).addTo(map);
+    marker.bindPopup("<strong>地標</strong><br>標示的位置。").openPopup();
+
+    function foundHandler(e) {
+        marker.setLatLng(e.latlng); // 移動 marker
+    }
+</script>
+
+</html>
