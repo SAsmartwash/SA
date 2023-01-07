@@ -28,10 +28,7 @@
             <p>狀態　　　　　　　外送員正前往領取衣物<br>
         </div>
     </header>
-
-    <div class="main">
-        <div id="map"></div>
-    </div>
+    <div id="map"></div>
 
 </body>
 <script>
@@ -45,8 +42,8 @@
     map.addLayer(osm);
 
     var marker = L.marker([24.957547210362748, 121.24075323625465]).addTo(map);
-    marker.bindPopup("<strong>中原大學</strong><br>標示的位置。").openPopup();
-   
+    marker.bindPopup("<strong>地標</strong><br>標示的位置。").openPopup();
+
     map.locate({
         setView: true, // 是否讓地圖跟著移動中心點
         watch: true, // 是否要一直監測使用者位置
@@ -55,6 +52,7 @@
     });
     var self = L.marker([24.957547210362748, 121.24075323625465]).addTo(map);
     self.bindPopup("<strong>現在位置</strong>").openPopup();
+
     function foundHandler(e) {
         self.setLatLng(e.latlng); // 移動 marker
     }
