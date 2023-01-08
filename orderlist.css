@@ -1,7 +1,8 @@
-.tab{
-    background-color: #5FA2BD;
+.container{
+    background: #5FA2BD;
+    width: 70%;
+    height: auto;
 }
-
 .fa-cog:before, .fa-gear:before {
     content: none;
 }
@@ -9,18 +10,48 @@
     color: #B8D8E5;
     size: 100%;
   }
-.ch {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5%;
-    justify-content: space-evenly;
+.op{
+    width: 80%;
+    border: 0;
+    background: #5FA2BD;
+    color: #ffffff;
+    font-weight: bold;
+    display: block;
 }
-.ch1 {
-    display: flex;
-    padding: auto;
-    align-items: center;
-    justify-content: center;
+option{
+    background: #ffffff;
+    color: #5FA2BD;
+    font-weight: bold;
 }
-.ch1 p{
+map{
+    max-width: 100%;
+    margin: auto;
+    border:"0"; 
+}
+.tab {
+    height: 100%;
+    overflow: hidden;
+    background: #5FA2BD;
+    color: #ffffff;
+    border: none;
+
+  }
+.tablink button {
+    background-color: inherit;
+    color: #fff;
+    float: right;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    border-radius: 30px;
+  }
+.tablink button:hover {
+    background-color: #fff;
     color: #5FA2BD;
 }
+.tablink button.active {
+    background: #5FA2BD;
+    color: #ffffff;
+  }

@@ -18,17 +18,50 @@
 </head>
 
 <body>
-    <div id="upper line" class="tab">
+    <div id="upper line" class="container">
         <header>
             <a href="#" class="fa-cog fa-3x"><i class="fa-solid fa-delete-left"></i></a>
+            <a href="javascript:void(0)" onclick="openTab(event, 'Deliverway_im');">
+                <div class="tablink" onclick="openCity(event, '立即外送')">
+                    <button>立即外送</button>
+                </div>
+            </a>
+            <a href="javascript:void(0)" onclick="openTab(event, 'Deliverway_se');">
+                <div class="tablink" onclick="openCity(event, '自行外送')">    
+                    <button>自行外送</button>
+                </div>
+            </a>
         </header>
-        <section class="ch">
-            <div id="deliver way-im" class="ch1">
-                <p>立即外送</p>
+        <div id="自行外送" class="tab">
+            <div>
+                <select name="address" class="op">
+                    <option value=""><p>請選擇當前地址</p></option>
+                    <option value="ad1"><p>#</p></option>
+                    <option value="ad2"><p>##</p></option>
+                </select>
             </div>
-            <div id="deliver way-self" class="ch1">
-                <p>自行外送</p>
+            <div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.3366747341033!2d121.61086401543676!3d25.056575583961763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442ab588f514ee5%3A0x181b71264df811b0!2zS0tCT1gg6aGY5aKD57ay6KiK!5e0!3m2!1szh-TW!2stw!4v1568037858348!5m2!1szh-TW!2stw"></iframe>
             </div>
-        </section>
+        </div>
+        <div id="立即外送" class="tab">
+            12345
+        </div>
     </div>
 </body>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("tab");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" white", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.firstElementChild.className += " white";
+    }
+</script>
