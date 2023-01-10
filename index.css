@@ -1,6 +1,7 @@
 html,
 body,
 .main,
+#main,
 .tab {
     height: 100%;
     padding: 0;
