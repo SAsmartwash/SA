@@ -13,12 +13,12 @@
         integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-    <link href="index.css" rel="stylesheet">
     <link href="site.css" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>智慧喜</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>查找站點</title>
 </head>
 
 <body>
@@ -28,36 +28,103 @@
             <p>狀態　　　　　　　外送員正前往領取衣物<br>
         </div>
     </header>
-    <div id="map"></div>
-
+    <div id="main">
+        <div class="nav">
+            <a href="javascript:void(0)" onclick="history.back()" value="上一頁"><i class="fa-solid fa-arrow-left"></i></a>
+            <h2>查找站點</h2>
+        </div>
+        <section>
+            <h2>最近站點</h2>
+            <div class="site">
+                <h2>劉老教授智慧喜 中壢中原店</h2>
+                <p>桃園市中壢區弘揚路100號</p>
+                <p>03-5555555</p>
+            </div>
+        </section>
+        <section>
+            <h2>其他站點</h2>
+            <div class="site">
+                <h2>劉老教授智慧喜 中壢中原店</h2>
+                <p>桃園市中壢區弘揚路100號</p>
+                <p>03-5555555</p>
+            </div><div class="site">
+                <h2>劉老教授智慧喜 中壢中原店</h2>
+                <p>桃園市中壢區弘揚路100號</p>
+                <p>03-5555555</p>
+            </div><div class="site">
+                <h2>劉老教授智慧喜 中壢中原店</h2>
+                <p>桃園市中壢區弘揚路100號</p>
+                <p>03-5555555</p>
+            </div><div class="site">
+                <h2>劉老教授智慧喜 中壢中原店</h2>
+                <p>桃園市中壢區弘揚路100號</p>
+                <p>03-5555555</p>
+            </div>
+        </section>
+        <a href="javascript:void(0)" id="openMap" onclick="map_open()"><i class="fa-solid fa-store">地圖找點</i></a>
+    </div>
+    <div class="" style="display:none" id="mapDiv">
+        <a href="javascript:void(0)" onclick="map_close()"><i class="fa-solid fa-xmark"></i></a>
+        <section>
+            <div id="map"></div>
+        </section>
+    </div>
 </body>
+
 <script>
-    var map = L.map('map');
-    map.setView(new L.LatLng(24.957547210362748, 121.24075323625465), 16);
-    var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    var osm = new L.TileLayer(osmUrl, {
-        minZoom: 8,
-        maxZoom: 24
-    });
-    map.addLayer(osm);
+    const cycu = [24.957547210362748, 121.24075323625465];
+    var map = L.map('map').setView(cycu, 16);
+    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        minZoom: 16,
+        maxZoom: 20,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
 
     var marker = L.marker([24.957547210362748, 121.24075323625465]).addTo(map);
-    marker.bindPopup("<strong>地標</strong><br>標示的位置。").openPopup();
+    marker.bindPopup("<strong>地標</strong><br>標示的位置。");
 
     map.locate({
-        setView: true, // 是否讓地圖跟著移動中心點
-        watch: true, // 是否要一直監測使用者位置
-        enableHighAccuracy: true, // 是否要高精準度的抓位置
-        timeout: 10000 // 觸發locationerror事件之前等待的毫秒數
+        setView: false,
+        watch: true,
+        enableHighAccuracy: true
     });
-    var self = L.marker([24.957547210362748, 121.24075323625465]).addTo(map);
-    self.bindPopup("<strong>現在位置</strong>").openPopup();
+    const self = L.marker([24.957547210362748, 121.24075323625465]).addTo(map).bindPopup("<strong>現在位置</strong>")
+        .openPopup();
+    const circle = L.circle([24.957547210362748, 121.24075323625465], 50).addTo(map);
 
-    function foundHandler(e) {
-        self.setLatLng(e.latlng); // 移動 marker
+    function clickInfo(e) {
+        console.log(e.latlng);
+        c.setLatLng(e.latlng);
     }
 
-    map.on('locationfound', foundHandler);
+    function onLocationError(e) {
+        alert(e.message);
+    }
+    map.on('locationerror', onLocationError);
+
+    function onLocationFound(e) {
+        self.setLatLng(e.latlng);
+        circle.setLatLng(e.latlng);
+        circle.setRadius(e.accuracy);
+        map.panTo(e.latlng);
+    }
+
+    map.on('locationfound', onLocationFound);
+</script>
+
+<script>
+    // mapbutton
+    function map_open(e) {
+        document.getElementById("mapDiv").style.display = "block";
+        document.getElementById("openMap").style.display = "none";
+        map.invalidateSize();
+    }
+
+    function map_close() {
+        document.getElementById("mapDiv").style.display = "none";
+        document.getElementById("openMap").style.display = "block";
+        map.invalidateSize();
+    }
 </script>
 
 </html>
