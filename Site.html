@@ -90,7 +90,7 @@
     function clickInfo(e) {
         var c = L.latLng(e.latlng)
         var distance = c.distanceTo(self.getLatLng());
-        marker.bindPopup("<strong>中原大學</strong><br>距離" + parseInt(distance) + "公尺");
+        marker.bindPopup("<strong>中原大學</strong><br>距離" + parseInt(distance) + "公尺<br><a href=orderlist.html>建立訂單</a>");
     }
     marker.on('click', clickInfo);
 
