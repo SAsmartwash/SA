@@ -69,6 +69,7 @@
 <script>
     const cycu = [24.957547210362748, 121.24075323625465];
     var map = L.map('map').setView(cycu, 16);
+
     var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         minZoom: 16,
         maxZoom: 20,
@@ -76,7 +77,6 @@
     }).addTo(map);
 
     var marker = L.marker([24.957547210362748, 121.24075323625465]).addTo(map);
-    marker.bindPopup("<strong>地標</strong><br>標示的位置。");
 
     map.locate({
         setView: false,
@@ -88,9 +88,11 @@
     const circle = L.circle([24.957547210362748, 121.24075323625465], 50).addTo(map);
 
     function clickInfo(e) {
-        console.log(e.latlng);
-        c.setLatLng(e.latlng);
+        var c = L.latLng(e.latlng)
+        var distance = c.distanceTo(self.getLatLng());
+        marker.bindPopup("<strong>中原大學</strong><br>距離" + parseInt(distance) + "公尺<br><a href=orderlist.html>建立訂單</a>");
     }
+    marker.on('click', clickInfo);
 
     function onLocationError(e) {
         alert(e.message);
