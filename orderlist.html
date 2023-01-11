@@ -18,35 +18,101 @@
 </head>
 
 <body>
-    <div id="upper line" class="container">
-        <header>
-            <a href="#" class="fa-cog fa-3x"><i class="fa-solid fa-delete-left"></i></a>
-            <a href="javascript:void(0)" onclick="openTab(event, 'Deliverway_im');">
-                <div class="tablink" onclick="openCity(event, '立即外送')">
-                    <button>立即外送</button>
-                </div>
-            </a>
-            <a href="javascript:void(0)" onclick="openTab(event, 'Deliverway_se');">
-                <div class="tablink" onclick="openCity(event, '自行外送')">    
-                    <button>自行外送</button>
-                </div>
-            </a>
-        </header>
-        <div id="自行外送" class="tab">
-            <div>
-                <select name="address" class="op">
-                    <option value=""><p>請選擇當前地址</p></option>
-                    <option value="ad1"><p>#</p></option>
-                    <option value="ad2"><p>##</p></option>
+    <header>
+    </header>
+    <div class="main">
+        <div class="nav">
+            <a href="javascript:void(0)" onclick="history.back()" value="上一頁"><i class="fa-solid fa-arrow-left"></i></a>
+            <div class="flex-container">
+                <a href="javascript:void(0)" onclick="openTab(event, 'Deliverway_im');">
+                    <div class="tablink">
+                        <p>立即外送</p>
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="openTab(event, 'Deliverway_se');">
+                    <div class="tablink bgwhite">
+                        <p>自行外送</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <form id="Deliverway_se" class="tab">
+            <div class="address">
+                <p>地址</p>
+                <select name="address" class="op" aria-placeholder="請選擇當前地址">
+                    <option value="ad0" selected>
+                        <p>請選擇當前地址</p>
+                    </option>
+                    <option value="ad1">
+                        <p>#</p>
+                    </option>
+                    <option value="ad2">
+                        <p>##</p>
+                    </option>
                 </select>
             </div>
             <div>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.3366747341033!2d121.61086401543676!3d25.056575583961763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442ab588f514ee5%3A0x181b71264df811b0!2zS0tCT1gg6aGY5aKD57ay6KiK!5e0!3m2!1szh-TW!2stw!4v1568037858348!5m2!1szh-TW!2stw"></iframe>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.3366747341033!2d121.61086401543676!3d25.056575583961763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442ab588f514ee5%3A0x181b71264df811b0!2zS0tCT1gg6aGY5aKD57ay6KiK!5e0!3m2!1szh-TW!2stw!4v1568037858348!5m2!1szh-TW!2stw"></iframe>
             </div>
-        </div>
-        <div id="立即外送" class="tab">
-            12345
-        </div>
+        </form>
+        <form id="Deliverway_im" class="tab">
+            <div class="address">
+                <p>立即外送</p>
+                <select name="address" class="op">
+                    <option value="">
+                        <p>請選擇當前地址</p>
+                    </option>
+                    <option value="ad1">
+                        <p>#</p>
+                    </option>
+                    <option value="ad2">
+                        <p>##</p>
+                    </option>
+                </select>
+            </div>
+            <section>
+                <div class="or1">
+                    <h2>洗衣材質</h2>
+                    <div class="flex-row">
+                        <p>人造纖維</p><input type="radio">
+                    </div>
+                    <div class="flex-row">
+                        <p>動物纖維</p><input type="radio">
+                    </div>
+                    <div class="flex-row">
+                        <p>其他</p><input type="radio">
+                    </div>
+                </div>
+                <div class="or1">
+                    <h2>推薦洗衣方式</h2>
+                    <div class="flex-sb">
+                        <p>洗衣方式</p>
+                        <select type="radio">
+                            <option value="">#</option>
+                        </select>
+                    </div>
+                    <div class="flex-sb">
+                        <p>水溫</p>
+                        <select type="radio">
+                            <option value="">#</option>
+                        </select>
+                    </div>
+                    <div class="flex-sb">
+                        <p>烘衣</p>
+                        <select type="radio">
+                            <option value="">#</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="or1">
+                    <h2>預估費用</h2>
+                </div>
+                <div class="or1" type="submit">
+                    <p class="btn">建立訂單</p>
+                </div>
+            </section>
+        </form>
     </div>
 </body>
 
@@ -59,9 +125,11 @@
         }
         tablinks = document.getElementsByClassName("tablink");
         for (i = 0; i < x.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" white", "");
+            tablinks[i].className = tablinks[i].className.replace(" bgwhite", "");
         }
         document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.firstElementChild.className += " white";
+        evt.currentTarget.firstElementChild.className += " bgwhite";
     }
 </script>
+
+</html>
