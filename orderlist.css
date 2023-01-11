@@ -85,13 +85,13 @@ option {
     font-weight: bold;
 }
 
-map {
-    max-width: 100%;
+#map {
+    height: 60vh;
     margin: auto;
-    border: "0";
 }
 
 .tab {
+    height: auto;
     overflow: hidden;
     background: #5FA2BD;
     border: none;
