@@ -135,14 +135,44 @@
                             </div>
                         </a>
                     </div>
-                    <div id="store" class="rank" style="display:none">Lorem ipsum dolor sit amet consectetur
-                        adipisicing elit. Velit voluptatum dignissimos fugit officia culpa rem nihil, provident
-                        minima quo exercitationem esse magnam sequi maiores quasi doloribus tenetur! Quidem, qui
-                        animi?</div>
-                    <div id="member" class="rank" style="display:none">Lorem, ipsum dolor sit amet consectetur
+                    <div id="store" class="rank" style="display:none">排行榜</div>
+                    <div id="member" class="rank" style="display:none">留言板Lorem, ipsum dolor sit amet consectetur
                         adipisicing elit. Voluptatem, nesciunt atque aliquid asperiores numquam maiores, repellendus
                         eveniet excepturi provident ea perferendis! Dignissimos placeat, laborum mollitia voluptate
-                        quidem non iste repellat?</div>
+                        quidem non iste repellat?
+			//試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看
+                        <script>
+
+	window.onload = function(){
+		
+		var oMessageBox = document.getElementById("messageBox");
+		var oInput = document.getElementById("myInput");
+		var oPostBtn = document.getElementById("doPost");
+		
+		oPostBtn.onclick = function(){
+			if(oInput.value){
+				//寫入發表留言的時間
+				var oTime = document.createElement("div");
+				oTime.className = "time";
+				var myDate = new  Date();
+				oTime.innerHTML = myDate.toLocaleString();
+				oMessageBox.appendChild(oTime);
+				
+				//寫入留言內容
+				var oMessageContent = document.createElement("div");
+				oMessageContent.className = "message_content";
+				oMessageContent.innerHTML = oInput.value;
+				oInput.value = "";
+				oMessageBox.appendChild(oMessageContent);
+			}
+			
+		}
+		
+	}
+
+</script>
+//試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看試試看
+			</div>
                 </div>
             </section>
         </div>
