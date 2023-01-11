@@ -347,18 +347,20 @@ section>div {
 }
 .slider_container {
     margin: 30px auto;
-    width: 700px;
-    height: 420px;
+    padding-bottom: 40%;
+    justify-content: center;
+    max-width: 90%;
     position: relative;
     border: 20px solid;
     border-color: #fff;
     box-shadow: #666 0 0 5px;
+    display: flex;
 }
-    .slider_container img {
-        width: 700px;
-        height: 400px;
-        display:flex;
-    }
+.slider_container img {
+    max-width: 70%;
+    display:flex;
+    object-fit:contain;
+}
 
 .slider_container div {
     position: absolute;
