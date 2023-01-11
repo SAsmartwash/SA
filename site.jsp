@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" import="java.sql.*"%>
+<%@include file="config.jsp" %>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -45,16 +48,27 @@
         </section>
         <section>
             <h2>其他站點</h2>
-            <div class="site">
-                <h2>劉老教授智慧喜 中壢中原店</h2>
-                <p>桃園市中壢區弘揚路100號<br>
-                    03-5555555</p>
-            </div>
-            <div class="site">
-                <h2>劉老教授智慧喜 中壢中原店</h2>
-                <p>桃園市中壢區弘揚路100號<br>
-                    03-5555555</p>
-            </div>
+            <%					
+					sql = "SELECT * FROM site" ;
+					rs = smt.executeQuery(sql);
+					String sid = "";
+					String name = "";
+					String address = "";
+					String phone = "";
+					String favorite = "";
+
+						while (rs.next()) {
+						sid = rs.getString("SiteId");
+						name = rs.getString("SiteName");
+						address = rs.getString("SiteAddress");
+						phone = rs.getString("Phone");
+						favorite = rs.getString("Favorite");
+						out.println("<div class='site'>");
+						out.println("<h2>"+rs.getString("SiteName")+"</h2>");
+						out.println("<p>"+rs.getString("SiteAddress")+"<br>"+rs.getString("Phone")+"</p>");
+				        out.println("</div>");
+}
+%>
         </section>
         <a href="javascript:void(0)" id="openMap" onclick="map_open()"><i class="fa-solid fa-store">地圖找點</i></a>
     </div>
@@ -123,5 +137,16 @@
         map.invalidateSize();
     }
 </script>
+<%
+con.close();
+			}
+            catch (SQLException sExec) {
+                out.println("SQL錯誤!" + sExec.toString());
+            }
+        }
+        catch (ClassNotFoundException err) {
+            out.println("class錯誤" + err.toString());
+    }
+%>
 
 </html>
