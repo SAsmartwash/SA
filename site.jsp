@@ -37,7 +37,7 @@
             <h2>查找站點</h2>
         </div>
         <section>
-            <h2>最近站點</h2>
+            <h2>最愛站點</h2>
             <div class="site">
                 <h2>劉老教授智慧喜 中壢中原店</h2>
                 <div class="address">
