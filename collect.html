@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/c5f2e8b9cc.js" crossorigin="anonymous"></script>
+    <!-- vue -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+            integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="jquery.qrcode.min.js"></script>
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    <link href="index.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧喜</title>
+</head>
+<body>
+    <video id="preview"></video>
+    <div id="qrcode"></div>
+
+    <script type="text/javascript">
+        $('#qrcode').qrcode({ render: 'table', text: 'https://www.google.com.tw/?hl=zh_TW' });
+        let scanner = new Instascan.Scanner({
+            continuous: true, // 連續掃描
+            video: document.getElementById('preview'), // 預覽
+            facingMode: {
+                exact: "environment"
+            }
+        });
+        scanner.addListener('scan', function (content) {
+
+            console.log(content);
+            getConfirmation();
+
+            function getConfirmation() {
+                var retVal = confirm("掃描結果：" + content); // 掃描結果顯示
+                if (retVal == true) {
+                    var checkurl = /^((https?|http?|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/; // 檢查是否為網址
+                    if (checkurl.test(content)) {
+                        window.open(content, "_self"); // 開啟網址
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+
+        });
+        Instascan.Camera.getCameras().then(function (cameras) {
+            if (cameras.length > 0) {
+                scanner.start(cameras[1]); // [0] 前鏡頭 [1] 後鏡頭
+            } else {
+                console.error('沒有找到相機');
+            }
+        }).catch(function (e) {
+            console.error(e);
+        });
+    </script>    
+</body>
+</html>
