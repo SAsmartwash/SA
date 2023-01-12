@@ -13,6 +13,14 @@ body {
     font-family: 思源宋體;
 }
 
+header {
+    margin: 10px;
+    border: 3px solid;
+    border-color: #5FA2BD;
+    border-radius: 30px;
+    box-shadow: #666 0 0 5px;
+}
+
 img {
     margin: auto;
     max-width: 100%;
@@ -347,6 +355,7 @@ section>div {
         width: 75%;
     }
 }
+
 .slider_container {
     margin: 30px auto;
     padding-bottom: 40%;
@@ -358,10 +367,11 @@ section>div {
     box-shadow: #666 0 0 5px;
     display: flex;
 }
+
 .slider_container img {
     max-width: 70%;
-    display:flex;
-    object-fit:contain;
+    display: flex;
+    object-fit: contain;
 }
 
 .slider_container div {
@@ -373,6 +383,7 @@ section>div {
     -webkit-animation: round 20s linear infinite;
     animation: round 20s linear infinite;
 }
+
 @-webkit-keyframes round {
     5% {
         opacity: 1;
@@ -406,6 +417,7 @@ section>div {
         filter: alpha(opacity=0);
     }
 }
+
 .slider_container div:nth-child(4) {
     -webkit-animation-delay: 0s;
     animation-delay: 0s;
@@ -425,6 +437,7 @@ section>div {
     -webkit-animation-delay: 15s;
     animation-delay: 15s;
 }
+
 .slider_container:hover div {
     -webkit-animation-play-state: paused;
     animation-play-state: paused;

@@ -17,10 +17,12 @@
 </head>
 
 <body>
-    <header>
-        <div style="display: none;">
-            <h2>當前訂單</h2>
-            <p>狀態　　　　　　　外送員正前往領取衣物<br>
+    <header onclick="openTab(event, 'Order');" style="cursor :pointer;">
+        <div class="tablink">
+            <div class="noworder" style="display: ;">
+                <h2>當前訂單</h2>
+                <p>狀態　　　　　　　外送員正前往領取衣物<br>
+            </div>
         </div>
     </header>
 
@@ -240,8 +242,6 @@
         document.getElementById(rankName).style.display = "block";
         evt.currentTarget.firstElementChild.className += " bg";
     }
-
-
 </script>
 
 </html>
