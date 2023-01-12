@@ -299,6 +299,8 @@ section>div {
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
 
     }
 
@@ -327,7 +329,7 @@ section>div {
 
     i,
     ul {
-        height: 2vh;
+        height: 5vh;
         padding: 10px;
     }
 

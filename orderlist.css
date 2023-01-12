@@ -2,6 +2,11 @@
     background: #5FA2BD;
 }
 
+.nav {
+    display: flex;
+    flex-direction: row
+}
+
 #Deliverway_se {
     display: block;
 }
