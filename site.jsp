@@ -38,25 +38,32 @@
         </div>
         <section>
             <h2>最愛站點</h2>
-            <div class="site">
-                <h2>劉老教授智慧喜 中壢中原店</h2>
-                <div class="address">
-                    <p>桃園市中壢區弘揚路100號<br>
-                        03-5555555</p>
-                </div>
-            </div>
-        </section>
-        <section>
-            <h2>其他站點</h2>
             <%					
-					sql = "SELECT * FROM site" ;
+					sql = "SELECT * FROM site where favorite = 1" ;
 					rs = smt.executeQuery(sql);
 					String sid = "";
 					String name = "";
 					String address = "";
 					String phone = "";
 					String favorite = "";
-
+                    while (rs.next()) {
+						sid = rs.getString("SiteId");
+						name = rs.getString("SiteName");
+						address = rs.getString("SiteAddress");
+						phone = rs.getString("Phone");
+						favorite = rs.getString("Favorite");
+						out.println("<div class='site'>");
+                            out.println("<div class='sitename'>");
+						out.println("<h2>"+rs.getString("SiteName")+"</h2>");
+                        out.println("<i class=fa-regular fa-heart></i>");
+                        out.println("</div>");
+						out.println("<p>"+rs.getString("SiteAddress")+"<br>"+rs.getString("Phone")+"</p>");
+				        out.println("</div>");}
+%>
+        </section>
+        <section>
+            <h2>其他站點</h2>
+            <%
 						while (rs.next()) {
 						sid = rs.getString("SiteId");
 						name = rs.getString("SiteName");
@@ -64,7 +71,10 @@
 						phone = rs.getString("Phone");
 						favorite = rs.getString("Favorite");
 						out.println("<div class='site'>");
+                            out.println("<div class='sitename'>");
 						out.println("<h2>"+rs.getString("SiteName")+"</h2>");
+                        out.println("<i class=fa-regular fa-heart></i>");
+                        out.println("</div>");
 						out.println("<p>"+rs.getString("SiteAddress")+"<br>"+rs.getString("Phone")+"</p>");
 				        out.println("</div>");
 }

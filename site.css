@@ -32,9 +32,11 @@ a {
 }
 
 .site {
-    margin: 10px;
+    
 }
-
+.sitename{
+    display: flex;
+}
 .site h2 {
     color: black;
     padding: 15px;
@@ -48,6 +50,7 @@ a {
 }
 
 .site {
+    margin: 10px;
     background: #ffffff;
     background: -moz-linear-gradient(top, #ffffff 0%, #b8d8e5 100%);
     background: -webkit-linear-gradient(top, #ffffff 0%, #b8d8e5 100%);
