@@ -53,10 +53,10 @@
             <section>
                 <div class="or1">
                     <div class="flex-container">
-                        <label for="bagid">
+                        <label for="BagId">
                             <h3>袋子ID :</h3>
                         </label>
-                        <input type="number" name="bag" id="bagid" min="1" max="99999" required="required">
+                        <input type="number" name="BagId" id="BagId" min="1" max="99999" required="required">
                     </div>
                 </div>
                 <div class="or1">
@@ -249,7 +249,7 @@
                 <div class="or1">
                     <h2>付款方式</h2>
                     <%
-                    sql = "SELECT * FROM  sa.credit ";
+                    sql = "SELECT * FROM  sa.credit;
                     rs = smt.executeQuery(sql);
                     
                     while (rs.next()) {
@@ -302,18 +302,24 @@
     function clickInfo(e) {
         var c = L.latLng(e.latlng)
         var distance = c.distanceTo(self.getLatLng());
-        marker1.bindPopup("<strong>中原中壢店<input type='number' name='siteId' value='1' hidden></strong><br>距離" + parseInt(
-            distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
-        marker2.bindPopup("<strong>中壢元智店<input type='number' name='siteId' value='2' hidden></strong><br>距離" + parseInt(
-            distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
-        marker3.bindPopup("<strong>中壢中央店<input type='number' name='siteId' value='3' hidden></strong><br>距離" + parseInt(
-            distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
-        marker4.bindPopup("<strong>中壢健行店<input type='number' name='siteId' value='4' hidden></strong><br>距離" + parseInt(
-            distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
-        marker5.bindPopup("<strong>中壢萬能店<input type='number' name='siteId' value='5' hidden></strong><br>距離" + parseInt(
-            distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
-        marker6.bindPopup("<strong>中壢弘揚店<input type='number' name='siteId' value='6' hidden></strong><br>距離" + parseInt(
-            distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
+        marker1.bindPopup("<strong>中壢中原店<input type='number' name='SiteName' value='中壢中原店' hidden></strong><br>距離" +
+            parseInt(
+                distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
+        marker2.bindPopup("<strong>中壢元智店<input type='number' name='SiteName' value='中壢元智店' hidden></strong><br>距離" +
+            parseInt(
+                distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
+        marker3.bindPopup("<strong>中壢中央店<input type='number' name='SiteName' value='中壢中央店' hidden></strong><br>距離" +
+            parseInt(
+                distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
+        marker4.bindPopup("<strong>中壢健行店<input type='number' name='SiteName' value='中壢健行店' hidden></strong><br>距離" +
+            parseInt(
+                distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
+        marker5.bindPopup("<strong>中壢萬能店<input type='number' name='SiteName' value='中壢萬能店' hidden></strong><br>距離" +
+            parseInt(
+                distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
+        marker6.bindPopup("<strong>中壢弘揚店<input type='number' name='SiteName' value='中壢弘揚店' hidden></strong><br>距離" +
+            parseInt(
+                distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
 
     }
     marker1.on('click', clickInfo);

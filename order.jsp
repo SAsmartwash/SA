@@ -27,44 +27,29 @@
 
 <body>
     <%
-    String siteId =request.getParameter("siteId");
+    String Status =request.getParameter("Status");
+    Integer BagId = Integer.parseInt(request.getParameter("BagId"));
+    String SiteName =request.getParameter("SiteName");
     String DeliverWay =request.getParameter("DeliverWay");
-    String aid = request.getParameter("aid");
+    Integer aid = Integer.parseInt(request.getParameter("aid"));
     String address = request.getParameter("address");
-    String mid = request.getParameter("mid");
+    Integer mid = Integer.parseInt(request.getParameter("mid"));
     String mname = request.getParameter("mname");
-    String tid = request.getParameter("tid");
+    Integer tid = Integer.parseInt(request.getParameter("tid"));
     String tname = request.getParameter("tname");
-    String wid = request.getParameter("wid");
+    Integer wid = Integer.parseInt(request.getParameter("wid"));
     String wname = request.getParameter("wname");
-    String did = request.getParameter("did");
+    Integer did = Integer.parseInt(request.getParameter("did"));
     String dname = request.getParameter("dname");
-    String cn = request.getParameter("cn");
+    Integer cn = Integer.parseInt(request.getParameter("cn"));
     String cname = request.getParameter("cname");
-                sql = "SELECT * FROM bag WHERE user = '" + session.getAttribute("member") + "'";
-                rs = smt.executeQuery(sql);
-
-                String pid = "";
-                int quantity = 0;
-                int setnumber = 0;
-                while (rs.next()) {
-                    pid = rs.getString("pid");
-                    quantity = Integer.parseInt(rs.getString("quantity"));
-                    setnumber = Integer.parseInt(rs.getString("setnumber"));
-                name = rs.getString("name");
-                    sql = "UPDATE product SET quantity = '" + (quantity - setnumber) + "' WHERE pid = '" + pid + "'";
-                    con.createStatement().executeUpdate(sql);
-
-sql = "INSERT INTO `order` (DeliverWay, aid, pid, address, mid, mname, tid, tname , wid, wname, did, dname, cn, cname)
-VALUES( '" + aid + "','"+ session.getAttribute("member") + "', '" + address + "', '" + mid + "', '" + mname + "', '" + tid + "', '" + tname + "', '" + wid + "', '" + wname + "', '" + did + "', '" + dname + "', '" + cn + "', '" + cname + "')";
-                    con.createStatement().executeUpdate(sql);
-                }
-
-                sql = "DELETE FROM cart WHERE mid = '" + session.getAttribute("member") + "'";
-                con.createStatement().executeUpdate(sql);
+    sql = "UPDATE bag SET `Status` =  Status where `BagId` = BagId ";
+    con.createStatement().executeUpdate(sql);
+    sql = "INSERT INTO `order` (BagId, SiteName, DeliverWay, Address_AddressId, Address, MaterialId, WaterTempertureId, WashId, DryId, CreditNum)VALUES('"+ BagId +"' ,'" + SiteName + "','" + DeliverWay + "','" + aid + "', '" + address + "', '" + mid + "', '" + tid + "', '" + wid + "', '" + did + "', '" + cn + "')";
+    con.createStatement().executeUpdate(sql);
     %>
     <script>
-        swal ({
+        swal({
             title: "購買成功",
             html: "<a href='index.jsp'><input type='button' class='swal-btn btn btn-success' value='查看訂單'></input></a>",
             showConfirmButton: false,
@@ -73,8 +58,7 @@ VALUES( '" + aid + "','"+ session.getAttribute("member") + "', '" + address + "'
         });
     </script>
 </body>
-    <%
-
+<%
                 con.close();
             }
 
@@ -87,4 +71,5 @@ VALUES( '" + aid + "','"+ session.getAttribute("member") + "', '" + address + "'
             out.println("class錯誤" + err.toString());
         }
     %>
+
 </html>
