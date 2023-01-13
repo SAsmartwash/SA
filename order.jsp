@@ -27,6 +27,8 @@
 
 <body>
     <%
+    String siteId =request.getParameter("siteId");
+    String DeliverWay =request.getParameter("DeliverWay");
     String aid = request.getParameter("aid");
     String address = request.getParameter("address");
     String mid = request.getParameter("mid");
@@ -39,7 +41,7 @@
     String dname = request.getParameter("dname");
     String cn = request.getParameter("cn");
     String cname = request.getParameter("cname");
-                sql = "SELECT * FROM cart WHERE mid = '" + session.getAttribute("member") + "'";
+                sql = "SELECT * FROM bag WHERE user = '" + session.getAttribute("member") + "'";
                 rs = smt.executeQuery(sql);
 
                 String pid = "";
@@ -49,11 +51,12 @@
                     pid = rs.getString("pid");
                     quantity = Integer.parseInt(rs.getString("quantity"));
                     setnumber = Integer.parseInt(rs.getString("setnumber"));
-name = rs.getString("name");
+                name = rs.getString("name");
                     sql = "UPDATE product SET quantity = '" + (quantity - setnumber) + "' WHERE pid = '" + pid + "'";
                     con.createStatement().executeUpdate(sql);
 
-sql = "INSERT INTO `order` (price, mid, pid, amount, count, username,address, tel ,name) VALUES( '" + price + "','"+ session.getAttribute("member") + "', '" + pid + "', '" + setnumber + "', '" + count + "', '" + username + "', '" + address + "', '" + tel + "', '" + name + "')";
+sql = "INSERT INTO `order` (DeliverWay, aid, pid, address, mid, mname, tid, tname , wid, wname, did, dname, cn, cname)
+VALUES( '" + aid + "','"+ session.getAttribute("member") + "', '" + address + "', '" + mid + "', '" + mname + "', '" + tid + "', '" + tname + "', '" + wid + "', '" + wname + "', '" + did + "', '" + dname + "', '" + cn + "', '" + cname + "')";
                     con.createStatement().executeUpdate(sql);
                 }
 

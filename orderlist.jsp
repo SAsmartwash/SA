@@ -52,6 +52,14 @@
             </div>
             <section>
                 <div class="or1">
+                    <div class="flex-container">
+                        <label for="bagid">
+                            <h3>袋子ID :</h3>
+                        </label>
+                        <input type="number" name="bag" id="bagid" min="1" max="99999" required="required">
+                    </div>
+                </div>
+                <div class="or1">
                     <h2>洗衣材質</h2>
                     <%
                     sql = "SELECT * FROM  sa.material ";
@@ -72,7 +80,8 @@
                     mid = rs.getString("MaterialId");
                     mname = rs.getString("Material");%>
                     <div class="flex-row">
-                        <%= mid %><p><%= mname %></p><input type="radio" name="material" required="required" checked>
+                        <%= mid %><p><%= mname %></p><input type="radio" value="<%= mid %>" name="material"
+                            required="required" checked>
                     </div><%
                 }
                 %>
@@ -168,6 +177,14 @@
             </div>
             <section>
                 <div class="or1">
+                    <div class="flex-container">
+                        <label for="bagid">
+                            <h3>袋子ID :</h3>
+                        </label>
+                        <input type="number" name="bag" id="bagid" min="1" max="99999" required="required">
+                    </div>
+                </div>
+                <div class="or1">
                     <h2>洗衣材質</h2>
                     <%
                     sql = "SELECT * FROM  sa.material ";
@@ -244,17 +261,95 @@
                 }
                 %>
                 </div>
+                <div class="or1">
+                    <button type='submit' value='Submit'>
+                        <h2>建立訂單</h2>
+                    </button>
+                </div>
             </section>
             <!-- <div class="or1">
                     <h2>預估費用</h2>
                 </div> -->
-            <a href="" class="or1" type="submit">
-                <p class="btn">建立訂單</p>
-            </a>
         </form>
     </div>
 </body>
-<script src="site.js"></script>
+<script>
+    const cycu = [24.957547210362748, 121.24075323625465];
+    var map = L.map('map').setView(cycu, 16);
+
+    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        minZoom: 12,
+        maxZoom: 20,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    var marker1 = L.marker([24.95756, 121.24053]).addTo(map);
+    var marker2 = L.marker([24.97030, 121.26342]).addTo(map);
+    var marker3 = L.marker([24.96810, 121.19532]).addTo(map);
+    var marker4 = L.marker([24.94719, 121.22900]).addTo(map);
+    var marker5 = L.marker([24.99032, 121.23218]).addTo(map);
+    var marker6 = L.marker([24.95409, 121.24190]).addTo(map);
+
+    map.locate({
+        setView: false,
+        watch: true,
+        enableHighAccuracy: true
+    });
+    const self = L.marker([24.957547210362748, 121.24075323625465]).addTo(map).bindPopup("<strong>現在位置</strong>")
+        .openPopup();
+    const circle = L.circle([24.957547210362748, 121.24075323625465], 50).addTo(map);
+
+    function clickInfo(e) {
+        var c = L.latLng(e.latlng)
+        var distance = c.distanceTo(self.getLatLng());
+        marker1.bindPopup("<strong>中原中壢店<input type='number' name='siteId' value='1' hidden></strong><br>距離" + parseInt(
+            distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
+        marker2.bindPopup("<strong>中壢元智店<input type='number' name='siteId' value='2' hidden></strong><br>距離" + parseInt(
+            distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
+        marker3.bindPopup("<strong>中壢中央店<input type='number' name='siteId' value='3' hidden></strong><br>距離" + parseInt(
+            distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
+        marker4.bindPopup("<strong>中壢健行店<input type='number' name='siteId' value='4' hidden></strong><br>距離" + parseInt(
+            distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
+        marker5.bindPopup("<strong>中壢萬能店<input type='number' name='siteId' value='5' hidden></strong><br>距離" + parseInt(
+            distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
+        marker6.bindPopup("<strong>中壢弘揚店<input type='number' name='siteId' value='6' hidden></strong><br>距離" + parseInt(
+            distance) + "公尺<br><button type='submit' value='Submit'>建立訂單</button>");
+
+    }
+    marker1.on('click', clickInfo);
+    marker2.on('click', clickInfo);
+    marker3.on('click', clickInfo);
+    marker4.on('click', clickInfo);
+    marker5.on('click', clickInfo);
+    marker6.on('click', clickInfo);
+
+    function onLocationError(e) {
+        alert(e.message);
+    }
+    map.on('locationerror', onLocationError);
+
+    function onLocationFound(e) {
+        self.setLatLng(e.latlng);
+        circle.setLatLng(e.latlng);
+        circle.setRadius(e.accuracy);
+        map.panTo(e.latlng);
+    }
+
+    map.on('locationfound', onLocationFound);
+
+    // mapbutton
+    function map_open(e) {
+        document.getElementById("mapDiv").style.display = "block";
+        document.getElementById("openMap").style.display = "none";
+        map.invalidateSize();
+    }
+
+    function map_close() {
+        document.getElementById("mapDiv").style.display = "none";
+        document.getElementById("openMap").style.display = "block";
+        map.invalidateSize();
+    }
+</script>
 
 <script>
     function openTab(evt, tabName) {
