@@ -44,9 +44,46 @@
         <form id="Deliverway_se" class="tab">
             <div class="address">
                 <p>自行外送</p>
-                <p>請定位當前位址，選擇站點</p>
+                <p>請填好材質後定位當前位址，選擇站點建立訂單</p>
             </div>
             <section>
+                <div class="or1">
+                    <h2>洗衣材質</h2>
+                    <div class="flex-row">
+                        <p>人造纖維</p><input type="radio">
+                    </div>
+                    <div class="flex-row">
+                        <p>動物纖維</p><input type="radio">
+                    </div>
+                    <div class="flex-row">
+                        <p>其他</p><input type="radio">
+                    </div>
+                </div>
+                <div class="or1">
+                    <h2>推薦洗衣方式</h2>
+                    <div class="flex-sb">
+                        <p>洗衣方式</p>
+                        <select type="radio">
+                            <option value="">#</option>
+                        </select>
+                    </div>
+                    <div class="flex-sb">
+                        <p>水溫</p>
+                        <select type="radio">
+                            <option value="">#</option>
+                        </select>
+                    </div>
+                    <div class="flex-sb">
+                        <p>烘衣</p>
+                        <select type="radio">
+                            <option value="">#</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- <div class="or1">
+                    <h2>預估費用</h2>
+                </div> -->
+
                 <div id="map"></div>
             </section>
         </form>
@@ -69,13 +106,13 @@
                 <div class="or1">
                     <h2>洗衣材質</h2>
                     <div class="flex-row">
-                        <p>人造纖維</p><input type="radio">
+                        <p>人造纖維</p><input type="radio" name="material" checked>
                     </div>
                     <div class="flex-row">
-                        <p>動物纖維</p><input type="radio">
+                        <p>動物纖維</p><input type="radio" name="material">
                     </div>
                     <div class="flex-row">
-                        <p>其他</p><input type="radio">
+                        <p>其他</p><input type="radio" name="material">
                     </div>
                 </div>
                 <div class="or1">
