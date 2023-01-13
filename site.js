@@ -1,4 +1,4 @@
-
+<%response.setContentType("text/javascript;charset=utf-8");%>
     const cycu = [24.957547210362748, 121.24075323625465];
     var map = L.map('map').setView(cycu, 16);
 
@@ -8,11 +8,21 @@
         attribution: '© OpenStreetMap'
     }).addTo(map);
     <%
+    String sid = "";
+                    String sname = "";
+                    String lng = "";
+                    String lat = "";
     sql = "SELECT * FROM  sa.site ";
     rs = smt.executeQuery(sql);
-    %>
-    var marker = L.marker([24.957547210362748, 121.24075323625465]).addTo(map);
-
+    while (rs.next()) {
+        sid = rs.getString("SiteId");
+        sname = rs.getString("SiteName");
+        lng = rs.getString("Longitude");
+        lat = rs.getString("Latitude");%>
+    var marker <%= sid %> = L.marker([ <%= lng %>,  <%= lat %>]).addTo(map);
+    <%
+}
+%>
     map.locate({
         setView: false,
         watch: true,
