@@ -8,9 +8,9 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"
-            integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="jquery.qrcode.min.js"></script>
-    <script type="text/javascript" src="instascan.min.js"></script>
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     <link href="index.css" rel="stylesheet">
     <link href="collect.css" rel="stylesheet">
     <meta charset="UTF-8">
@@ -18,6 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>智慧喜</title>
 </head>
+
 <body>
     <div class="bg">
         <div id="qrcode"></div>
@@ -28,7 +29,10 @@
 
 
     <script type="text/javascript">
-        $('#qrcode').qrcode({ render: 'table', text: '20230112111426' });
+        $('#qrcode').qrcode({
+            render: 'table',
+            text: '20230112111426'
+        });
         let scanner = new Instascan.Scanner({
             continuous: true, // 連續掃描
             video: document.getElementById('preview'), // 預覽
@@ -44,7 +48,8 @@
             function getConfirmation() {
                 var retVal = confirm("掃描結果：" + content); // 掃描結果顯示
                 if (retVal == true) {
-                    var checkurl = /^((https?|http?|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/; // 檢查是否為網址
+                    var checkurl =
+                        /^((https?|http?|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/; // 檢查是否為網址
                     if (checkurl.test(content)) {
                         window.open(content, "_self"); // 開啟網址
                     }
@@ -67,4 +72,5 @@
         });
     </script>
 </body>
+
 </html>
