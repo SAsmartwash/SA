@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>個人資料</title>
+    <title>查找站點</title>
 </head>
 
 <body>
@@ -27,28 +27,38 @@
     <div id="main">
         <div class="nav">
             <a href="javascript:void(0)" onclick="history.back()" value="上一頁"><i class="fa-solid fa-arrow-left"></i></a>
-            <h2>個人資料</h2>
+            <h2>編輯帳戶</h2>
         </div>
+          <div id="Home" class="tab" style="display:block">
+            <div class="home">
         <section>
             <div class="me"><i class="fa-regular fa-user"></i>
                 <div class="profile">
-                    <div class="name">王小明</div>
-                    <a href="edit.html" class="a">編輯帳戶</a>
+                    <div class="name"></div>
+                    <a href="edit.html" class="a"></a>
                 </div>
             </div>
         </section>
         <section>
-            <h2>已儲存地點</h2>
             <div class="site">
-                <h2>住家</h2>
-                <p>新增住家</p>
+                <h2>名字</h2>
+                <p>新增名字</p>
             </div>
             <div class="site">
-                <h2>公司</h2>
-                <p>新增公司</p>
+                <h2>姓氏</h2>
+                <p>新增姓氏</p>
             </div>
             <div class="site">
-                <h2>登出</h2>
+                <h2>電子郵件</h2>
+                <p>新增電子郵件</p>
+            </div>
+            <div class="site">
+                <h2>電話號碼</h2>
+                <p>新增電話號碼</p>
+            </div>
+            <div class="site">
+                <h2>密碼</h2>
+                <p>新增密碼</p>
             </div>
         </section>
     </div>
@@ -59,33 +69,5 @@
         </section>
     </div>
 </body>
-<script src="site.js">
-    function openTab(evt, tabName) {
-        var i, x, tablinks;
-        x = document.getElementsByClassName("tab");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablink");
-        for (i = 0; i < x.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" white", "");
-        }
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.firstElementChild.className += " white";
-    }
-
-    function openrank(evt, rankName) {
-        var i, x, ranklinks;
-        x = document.getElementsByClassName("rank");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        ranklinks = document.getElementsByClassName("ranklink");
-        for (i = 0; i < x.length; i++) {
-            ranklinks[i].className = ranklinks[i].className.replace(" bg", "");
-        }
-        document.getElementById(rankName).style.display = "block";
-        evt.currentTarget.firstElementChild.className += " bg";
-    }
-</script>
+<script src="site.js"></script>
 </html>

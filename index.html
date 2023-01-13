@@ -17,12 +17,10 @@
 </head>
 
 <body>
-    <header onclick="openTab(event, 'Order');" style="cursor :pointer;display: none;">
-        <div class="tablink">
-            <div class="noworder">
-                <h2>當前訂單</h2>
-                <p>狀態　　　　　　　外送員正前往領取衣物<br>
-            </div>
+    <header>
+        <div style="display: none;">
+            <h2>當前訂單</h2>
+            <p>狀態　　　　　　　外送員正前往領取衣物<br>
         </div>
     </header>
 
@@ -205,9 +203,6 @@
                 <a href="scorestore.html" class="me1"><i class="fa-solid fa-star"></i>
                     <p>積分</p>
                 </a>
-                <a href="receipt.html" class="me1"><i class="fa-solid fa-receipt"></i>
-                    <p>發票</p>
-                </a>
             </div>
         </div>
     </div>
@@ -242,6 +237,8 @@
         document.getElementById(rankName).style.display = "block";
         evt.currentTarget.firstElementChild.className += " bg";
     }
+
+
 </script>
 
 </html>
