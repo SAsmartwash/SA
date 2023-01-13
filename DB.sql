@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
--- Host: localhost    Database: mydb
+-- Host: 127.0.0.1    Database: mydb
 -- ------------------------------------------------------
 -- Server version	8.0.26
 
@@ -147,7 +147,7 @@ CREATE TABLE `credit` (
 
 LOCK TABLES `credit` WRITE;
 /*!40000 ALTER TABLE `credit` DISABLE KEYS */;
-INSERT INTO `credit` VALUES (11473897,'07/22','1',432,'王大明','兆豐銀行',123456789);
+INSERT INTO `credit` VALUES (11473854,'06/24','3',867,'林小玉','郵局',230112144),(11473896,'05/13','2',475,'林祥','第一銀行',568713548),(11473897,'07/22','1',432,'王大明','兆豐銀行',123456789);
 /*!40000 ALTER TABLE `credit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,11 +275,6 @@ CREATE TABLE `order` (
   `OrderId` int NOT NULL AUTO_INCREMENT,
   `SiteName` varchar(20) NOT NULL,
   `Address` varchar(30) NOT NULL,
-  `Material` varchar(45) DEFAULT NULL,
-  `Washway` varchar(2) NOT NULL,
-  `Temperature` varchar(3) NOT NULL,
-  `Dry` varchar(4) NOT NULL,
-  `Processing` varchar(5) NOT NULL,
   `Number` varchar(16) NOT NULL,
   `Total` int NOT NULL,
   `DeliverWay` varchar(4) NOT NULL,
@@ -289,12 +284,27 @@ CREATE TABLE `order` (
   `credit_CreditNum` int NOT NULL,
   `Name` varchar(45) NOT NULL,
   `users_Account` int NOT NULL,
+  `WashId` int NOT NULL,
+  `WaterTempertureId` int NOT NULL,
+  `DryId` int NOT NULL,
+  `ProcessingId` int NOT NULL,
+  `MaterialId` int NOT NULL,
   PRIMARY KEY (`OrderId`,`Address_AddressId`,`credit_CreditNum`,`users_Account`),
   KEY `fk_order_credit1_idx` (`credit_CreditNum`),
   KEY `fk_order_users1_idx` (`users_Account`),
+  KEY `fk_washway_Id` (`WashId`),
+  KEY `fk_watertemperture_Id` (`WaterTempertureId`),
+  KEY `fk_dry_Id` (`DryId`),
+  KEY `fk_processing_Id` (`ProcessingId`),
+  KEY `fk_material_Id` (`MaterialId`),
+  CONSTRAINT `fk_dry_Id` FOREIGN KEY (`DryId`) REFERENCES `dry` (`DryId`),
+  CONSTRAINT `fk_material_Id` FOREIGN KEY (`MaterialId`) REFERENCES `material` (`MaterialId`),
   CONSTRAINT `fk_order_credit1` FOREIGN KEY (`credit_CreditNum`) REFERENCES `credit` (`CreditNum`),
-  CONSTRAINT `fk_order_users1` FOREIGN KEY (`users_Account`) REFERENCES `users` (`Account`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_order_users1` FOREIGN KEY (`users_Account`) REFERENCES `users` (`Account`),
+  CONSTRAINT `fk_processing_Id` FOREIGN KEY (`ProcessingId`) REFERENCES `processing` (`ProcessingId`),
+  CONSTRAINT `fk_washway_Id` FOREIGN KEY (`WashId`) REFERENCES `washway` (`WashId`),
+  CONSTRAINT `fk_watertemperture_Id` FOREIGN KEY (`WaterTempertureId`) REFERENCES `watertemperture` (`WaterTempertureId`)
+) ENGINE=InnoDB AUTO_INCREMENT=54358 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -303,6 +313,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` VALUES (14534,'中壢中原店','320桃園市中壢區中北路200號','11',253,'自行運送','2023-01-12 00:00:00',4,3,11473896,'林',568713548,1,1,1,1,1),(45347,'中壢中原店','320桃園市中壢區中北路200號','12',245,'立即送洗','2023-01-12 00:00:00',24,2,11473897,'阿明',123456789,3,3,2,2,2),(54357,'中壢中原店','320桃園市中壢區中北路200號','44',724,'立即送洗','2023-01-12 00:00:00',54,1,11473854,'YU',230112144,4,2,2,1,3);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -475,4 +486,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-13  8:25:45
+-- Dump completed on 2023-01-13  9:00:46
