@@ -49,15 +49,15 @@ String phone = "";
 int favorite = 0;
 while (rs.next()) {
 sid = rs.getString("SiteId");
-name = rs.getString("SiteName");
+name = name;
 address = rs.getString("SiteAddress");
 phone = rs.getString("Phone");
 favorite = rs.getInt("Favorite");
 out.println("<div class='site'>");
 out.println("<h2>"+rs.getString("SiteName")+"</h2>");%>
-            <button class="favorite-button" data-site-id="<%= sid %>" data-is-added="<%= favorite %>">
+            <!-- <button class="favorite-button" data-site-id="<%= sid %>" data-is-added="<%= favorite %>">
                 <i class="fa fa-heart"></i>
-            </button>
+            </button> -->
             <%
 out.println("<p>"+rs.getString("SiteAddress")+"<br>"+rs.getString("Phone")+"</p>");
 out.println("</div>");
@@ -79,9 +79,9 @@ out.println("</div>");
                         favorite = rs.getInt("Favorite");
                         out.println("<div class='site'>");
                         out.println("<h2>"+rs.getString("SiteName")+"</h2>");%>
-            <button class="favorite-button" data-site-id="<%= sid %>" data-is-added="<%= favorite %>">
+            <!-- <button class="favorite-button" data-site-id="<%= sid %>" data-is-added="<%= favorite %>">
                 <i class="fa fa-heart-o"></i>
-            </button>
+            </button> -->
             <%
                         out.println("<p>"+rs.getString("SiteAddress")+"<br>"+rs.getString("Phone")+"</p>");
                         out.println("</div>");

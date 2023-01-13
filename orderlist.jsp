@@ -1,3 +1,6 @@
+﻿<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" import="java.sql.*"%>
+<%@include file="config.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,15 +52,19 @@
             <section>
                 <div class="or1">
                     <h2>洗衣材質</h2>
+                    <%
+sql = "SELECT * FROM  sa.material ";
+rs = smt.executeQuery(sql);
+String mid = "";
+String name = "";
+                    while (rs.next()) {
+mid = rs.getString("MaterialId");
+name = rs.getString("Material");%>
                     <div class="flex-row">
-                        <p>人造纖維</p><input type="radio">
-                    </div>
-                    <div class="flex-row">
-                        <p>動物纖維</p><input type="radio">
-                    </div>
-                    <div class="flex-row">
-                        <p>其他</p><input type="radio">
-                    </div>
+                        <%= mid %><p><%= name %></p><input type="radio" name="material" checked>
+                    </div><%
+                }
+                %>
                 </div>
                 <div class="or1">
                     <h2>推薦洗衣方式</h2>
@@ -163,5 +170,16 @@
         evt.currentTarget.firstElementChild.className += " bgwhite";
     }
 </script>
+<%
+con.close();
+			}
+            catch (SQLException sExec) {
+                out.println("SQL錯誤!" + sExec.toString());
+            }
+        }
+        catch (ClassNotFoundException err) {
+            out.println("class錯誤" + err.toString());
+    }
+%>
 
 </html>
