@@ -32,11 +32,9 @@ a {
 }
 
 .site {
-    
+    margin: 10px;
 }
-.sitename{
-    display: flex;
-}
+
 .site h2 {
     color: black;
     padding: 15px;
@@ -50,11 +48,27 @@ a {
 }
 
 .site {
-    margin: 10px;
     background: #ffffff;
     background: -moz-linear-gradient(top, #ffffff 0%, #b8d8e5 100%);
     background: -webkit-linear-gradient(top, #ffffff 0%, #b8d8e5 100%);
     background: linear-gradient(to bottom, #ffffff 0%, #b8d8e5 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#b8d8e5', GradientType=0);
 
+}
+.fa-regular {
+    position: absolute;
+    left: 450px;
+}
+.name{
+    position: relative;
+    left: 425px;
+    top: 40px;
+}
+.me{
+    height: 80px;
+}
+.a{
+    position: relative;
+    left: 420px;
+    top: 40px;
 }

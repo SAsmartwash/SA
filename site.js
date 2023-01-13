@@ -9,8 +9,7 @@
     }).addTo(map);
 
     var marker = L.marker([24.957547210362748, 121.24075323625465]).addTo(map);
-    var marker1 = L.marker([24.9557916, 121.2409669]).addTo(map);
-    var marker2 = L.marker([24.9542733, 121.2422127]).addTo(map);
+
     map.locate({
         setView: false,
         watch: true,
@@ -23,9 +22,7 @@
     function clickInfo(e) {
         var c = L.latLng(e.latlng)
         var distance = c.distanceTo(self.getLatLng());
-        marker.bindPopup("<strong>中壢中原店</strong><br>距離" + parseInt(distance) + "公尺<br><a href=orderlist.html>建立訂單</a>");
-        marker1.bindPopup("<strong>中壢大仁店</strong><br>距離" + parseInt(distance) + "公尺<br><a href=orderlist.html>建立訂單</a>");
-        marker2.bindPopup("<strong>中壢弘揚店</strong><br>距離" + parseInt(distance) + "公尺<br><a href=orderlist.html>建立訂單</a>");
+        marker.bindPopup("<strong>中原大學</strong><br>距離" + parseInt(distance) + "公尺<br><a href=orderlist.html>建立訂單</a>");
     }
     marker.on('click', clickInfo);
 
