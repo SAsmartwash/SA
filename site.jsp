@@ -65,12 +65,7 @@
             <h2>其他站點</h2>
             <% sql = "SELECT * FROM site where favorite = 0" ;
             rs = smt.executeQuery(sql);
-            rs = smt.executeQuery(sql);
-					String sid = "";
-					String name = "";
-					String address = "";
-					String phone = "";
-					String favorite = "";
+
 						while (rs.next()) {
 						sid = rs.getString("SiteId");
 						name = rs.getString("SiteName");
