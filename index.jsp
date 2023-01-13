@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="header">
         <div style="display: none;">
             <h2>當前訂單</h2>
             <p>狀態　　　　　　　外送員正前往領取衣物<br>

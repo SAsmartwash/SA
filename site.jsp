@@ -108,7 +108,8 @@
     }).addTo(map);
 
     var marker = L.marker([24.957547210362748, 121.24075323625465]).addTo(map);
-
+    var marker1 = L.marker([24.9557916, 121.2409669]).addTo(map);
+    var marker2 = L.marker([24.9542733, 121.2422127]).addTo(map);
     map.locate({
         setView: false,
         watch: true,
