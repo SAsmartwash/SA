@@ -57,18 +57,19 @@ a {
 }
 .fa-regular {
     position: absolute;
-    left: 935px;
+    left: 430px;
+    top: 70px;
 }
 .name{
-    position: relative;
+    position: absolute;
     left: 425px;
-    top: 40px;
+    top: 120px;
 }
 .me{
     height: 70px;
 }
 .a{
-    position: relative;
+    position: absolute;
     left: 420px;
-    top: 40px;
+    top: 140px;
 }
