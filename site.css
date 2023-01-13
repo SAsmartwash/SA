@@ -57,7 +57,11 @@ a {
 }
 .fa-regular {
     position: absolute;
+<<<<<<< HEAD
     left: 450px;
+=======
+    left: 935px;
+>>>>>>> 2c0803806e142ec838799efa6ef7facf728ea24f
 }
 .name{
     position: relative;
@@ -65,7 +69,11 @@ a {
     top: 40px;
 }
 .me{
+<<<<<<< HEAD
     height: 80px;
+=======
+    height: 70px;
+>>>>>>> 2c0803806e142ec838799efa6ef7facf728ea24f
 }
 .a{
     position: relative;
