@@ -47,21 +47,135 @@
         <form id="Deliverway_se" class="tab">
             <div class="address">
                 <p>自行外送</p>
-                <p>請填好材質後定位當前位址，選擇站點建立訂單</p>
+                <p>請先填好材質後，再選擇站點建立訂單</p>
             </div>
             <section>
                 <div class="or1">
                     <h2>洗衣材質</h2>
                     <%
-sql = "SELECT * FROM  sa.material ";
-rs = smt.executeQuery(sql);
-String mid = "";
-String name = "";
+                    sql = "SELECT * FROM  sa.material ";
+                    rs = smt.executeQuery(sql);
+                    String aid = "";
+                    String address = "";
+                    String mid = "";
+                    String mname = "";
+                    String tid = "";
+                    String tname = "";
+                    String wid = "";
+                    String wname = "";
+                    String did = "";
+                    String dname = "";
+                    String cn = "";
+                    String cname = "";
                     while (rs.next()) {
-mid = rs.getString("MaterialId");
-name = rs.getString("Material");%>
+                    mid = rs.getString("MaterialId");
+                    mname = rs.getString("Material");%>
                     <div class="flex-row">
-                        <%= mid %><p><%= name %></p><input type="radio" name="material" checked>
+                        <%= mid %><p><%= mname %></p><input type="radio" name="material" checked>
+                    </div><%
+                }
+                %>
+                </div>
+                <div class="or1">
+                    <h2>推薦洗衣方式</h2>
+
+                    <div class="flex-sb">
+                        <p>洗衣方式</p>
+                        <select type="radio">
+                            <%
+                    sql = "SELECT * FROM  sa.washway ";
+                    rs = smt.executeQuery(sql);
+                    
+                                        while (rs.next()) {
+                                            wid = rs.getString("WashId");
+                                            wname = rs.getString("WashWay");%>
+                            <option value="<%= wid %>"><%= wname %></option>
+                            <%}%>
+                        </select>
+                    </div>
+
+                    <div class="flex-sb">
+                        <p>水溫</p>
+                        <select type="radio">
+						<%
+                            sql = "SELECT * FROM sa.watertemperture ";
+                            rs = smt.executeQuery(sql);
+                            while (rs.next()) {
+                            tid = rs.getString("WaterTempertureId");
+                            tname = rs.getString("Temperture");%>
+                            <option value="<%= tid %>"><%= tname %></option>
+                            <%}%>
+                        </select>
+                    </div>
+
+                    <div class="flex-sb">
+                        <p>烘衣</p>
+                        <select type="radio">
+                            <%
+                    sql = "SELECT * FROM  sa.dry ";
+                    rs = smt.executeQuery(sql);
+                    
+                                        while (rs.next()) {
+                                            did = rs.getString("DryId");
+                                            dname = rs.getString("Dry");%>
+                            <option value="<%= tid %>"><%= dname %></option>
+                            <%
+                        }
+                        %>
+                        </select>
+                    </div>
+                </div>
+                <!-- <div class="or1">
+                    <h2>預估費用</h2>
+                </div> -->
+                <div class="or1">
+                    <h2>付款方式</h2>
+                    <%
+                    sql = "SELECT * FROM  sa.credit ";
+                    rs = smt.executeQuery(sql);
+                    
+                    while (rs.next()) {
+                    cn = rs.getString("CreditNum");
+                    cname = rs.getString("CreditName");%>
+                    <div class="flex-row">
+                        <%= cn %><p><%= cname %></p><input type="radio" name="credit" checked>
+                    </div><%
+                }
+                %>
+                </div>
+                <div id="map"></div>
+            </section>
+        </form>
+        <form id="Deliverway_im" class="tab">
+            <div class="address">
+                <p>立即外送</p>
+                <select name="address" class="op">
+                    <%
+                    sql = "SELECT * FROM sa.address ";
+                    rs = smt.executeQuery(sql);
+                    while (rs.next()) {
+                    aid = rs.getString("AddressId");
+                    address = rs.getString("Address");%>
+                    <option value="<%= aid %>">
+                        <p><%= address %></p>
+                    </option>
+                    <%
+                }
+                %>
+                </select>
+            </div>
+            <section>
+                <div class="or1">
+                    <h2>洗衣材質</h2>
+                    <%
+                    sql = "SELECT * FROM  sa.material ";
+                    rs = smt.executeQuery(sql);
+                    
+                    while (rs.next()) {
+                    mid = rs.getString("MaterialId");
+                    mname = rs.getString("Material");%>
+                    <div class="flex-row">
+                        <%= mid %><p><%= mname %></p><input type="radio" name="material" checked>
                     </div><%
                 }
                 %>
@@ -71,85 +185,70 @@ name = rs.getString("Material");%>
                     <div class="flex-sb">
                         <p>洗衣方式</p>
                         <select type="radio">
-                            <option value="">#</option>
+                            <%
+                    sql = "SELECT * FROM  sa.washway ";
+                    rs = smt.executeQuery(sql);
+                                        while (rs.next()) {
+                                            wid = rs.getString("WashId");
+                                            wname = rs.getString("WashWay");%>
+                            <option value="<%= wid %>"><%= wname %></option>
+                            <%}%>
                         </select>
                     </div>
+
                     <div class="flex-sb">
                         <p>水溫</p>
                         <select type="radio">
-                            <option value="">#</option>
+						<%
+                            sql = "SELECT * FROM sa.watertemperture ";
+                            rs = smt.executeQuery(sql);
+                            while (rs.next()) {
+                            tid = rs.getString("WaterTempertureId");
+                            tname = rs.getString("Temperture");%>
+                            <option value="<%= tid %>"><%= tname %></option>
+                            <%}%>
                         </select>
                     </div>
+
                     <div class="flex-sb">
                         <p>烘衣</p>
                         <select type="radio">
-                            <option value="">#</option>
+                            <%
+                    sql = "SELECT * FROM  sa.dry ";
+                    rs = smt.executeQuery(sql);
+                    
+                                        while (rs.next()) {
+                                            did = rs.getString("DryId");
+                                            dname = rs.getString("Dry");%>
+                            <option value="<%= tid %>"><%= dname %></option>
+                            <%
+                        }
+                        %>
                         </select>
                     </div>
                 </div>
-                <!-- <div class="or1">
+                <div class="or1">
+                    <h2>付款方式</h2>
+                    <%
+                    sql = "SELECT * FROM  sa.credit ";
+                    rs = smt.executeQuery(sql);
+                    
+                    while (rs.next()) {
+                    cn = rs.getString("CreditNum");
+                    cname = rs.getString("CreditName");%>
+                    <div class="flex-row">
+                        <%= cn %><p><%= cname %></p><input type="radio" name="credit" checked>
+                    </div><%
+                }
+                %>
+                </div>
+            </section>
+            <!-- <div class="or1">
                     <h2>預估費用</h2>
                 </div> -->
-
-                <div id="map"></div>
-            </section>
-        </form>
-        <form id="Deliverway_im" class="tab">
-            <div class="address">
-                <p>立即外送</p>
-                <select name="address" class="op">
-                    <option value="">
-                        <p>請選擇當前地址</p>
-                    </option>
-                    <option value="ad1">
-                        <p>#</p>
-                    </option>
-                    <option value="ad2">
-                        <p>##</p>
-                    </option>
-                </select>
-            </div>
-            <section>
-                <div class="or1">
-                    <h2>洗衣材質</h2>
-                    <div class="flex-row">
-                        <p>人造纖維</p><input type="radio" name="material" checked>
-                    </div>
-                    <div class="flex-row">
-                        <p>動物纖維</p><input type="radio" name="material">
-                    </div>
-                    <div class="flex-row">
-                        <p>其他</p><input type="radio" name="material">
-                    </div>
-                </div>
-                <div class="or1">
-                    <h2>推薦洗衣方式</h2>
-                    <div class="flex-sb">
-                        <p>洗衣方式</p>
-                        <select type="radio">
-                            <option value="">#</option>
-                        </select>
-                    </div>
-                    <div class="flex-sb">
-                        <p>水溫</p>
-                        <select type="radio">
-                            <option value="">#</option>
-                        </select>
-                    </div>
-                    <div class="flex-sb">
-                        <p>烘衣</p>
-                        <select type="radio">
-                            <option value="">#</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="or1">
-                    <h2>預估費用</h2>
-                </div>
-                <a href="" class="or1" type="submit">
-                    <p class="btn">建立訂單</p>
-                </a>
-            </section>
+            <a href="" class="or1" type="submit">
+                <p class="btn">建立訂單</p>
+            </a>
         </form>
     </div>
 </body>

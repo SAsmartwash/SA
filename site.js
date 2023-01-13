@@ -7,7 +7,10 @@
         maxZoom: 20,
         attribution: '© OpenStreetMap'
     }).addTo(map);
-
+    <%
+    sql = "SELECT * FROM  sa.site ";
+    rs = smt.executeQuery(sql);
+    %>
     var marker = L.marker([24.957547210362748, 121.24075323625465]).addTo(map);
 
     map.locate({
@@ -22,6 +25,7 @@
     function clickInfo(e) {
         var c = L.latLng(e.latlng)
         var distance = c.distanceTo(self.getLatLng());
+        
         marker.bindPopup("<strong>中原大學</strong><br>距離" + parseInt(distance) + "公尺<br><a href=orderlist.html>建立訂單</a>");
     }
     marker.on('click', clickInfo);
