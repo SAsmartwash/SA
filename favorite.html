@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/c5f2e8b9cc.js" crossorigin="anonymous"></script>
+    <!-- vue -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <link href="site.css" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>最愛店家</title>
+</head>
+
+<body>
+    <header>
+        <div style="display: none;">
+            <h2>當前訂單</h2>
+            <p>狀態　　　　　　　外送員正前往領取衣物<br>
+        </div>
+    </header>
+    <div id="main">
+        <div class="nav">
+            <a href="javascript:void(0)" onclick="history.back()" value="上一頁"><i class="fa-solid fa-arrow-left"></i></a>
+            <h2>最愛店家</h2>
+        </div>
+        <section>
+            <div class="site">
+                <h2>劉老教授智慧喜 中壢中原店</h2>
+                <div class="address">
+                    <p>桃園市中壢區弘揚路100號<br>
+                        03-5555555</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="site">
+                <h2>劉老教授智慧喜 中壢中原店</h2>
+                <p>桃園市中壢區弘揚路100號<br>
+                    03-5555555</p>
+            </div>
+            <div class="site">
+                <h2>劉老教授智慧喜 中壢中原店</h2>
+                <p>桃園市中壢區弘揚路100號<br>
+                    03-5555555</p>
+            </div>
+        </section>
+    </div>
+    <div class="" style="display:none" id="mapDiv">
+        <a href="javascript:void(0)" onclick="map_close()"><i class="fa-solid fa-xmark"></i></a>
+        <section>
+            <div id="map"></div>
+        </section>
+    </div>
+</body>
+<script src="site.js"></script>
+</html>
