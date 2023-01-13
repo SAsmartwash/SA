@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: mydb
+-- Host: 127.0.0.1    Database: sadb
 -- ------------------------------------------------------
--- Server version	8.0.26
+-- Server version	8.0.27
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -36,7 +36,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (1,'320桃園市中壢區普忠路206號',230112144),(2,'320桃園市中壢區普忠路210號',123456789),(3,'320桃園市中壢區新中北路291號',123456789);
+INSERT INTO `address` VALUES (1,'320桃園市中壢區普忠路206號',230112144),(2,'320桃園市中壢區普忠路210號',123456789),(3,'320桃園市中壢區新中北路291號',568713548);
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,7 +296,7 @@ DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order` (
-  `OrderId` int NOT NULL AUTO_INCREMENT,
+  `OrderId` int NOT NULL,
   `SiteName` varchar(20) NOT NULL,
   `Address` varchar(30) NOT NULL,
   `Number` varchar(16) NOT NULL,
@@ -315,7 +315,9 @@ CREATE TABLE `order` (
   `BagId` int DEFAULT NULL,
   `CreditNum` bigint NOT NULL,
   `OrderStatusId` int NOT NULL,
-  PRIMARY KEY (`OrderId`,`Address_AddressId`,`users_Account`),
+  `recipe` bigint DEFAULT NULL,
+  `OrderNo` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`OrderNo`,`Address_AddressId`,`users_Account`),
   KEY `fk_order_users1_idx` (`users_Account`),
   KEY `fk_washway_Id` (`WashId`),
   KEY `fk_watertemperture_Id` (`WaterTempertureId`),
@@ -343,7 +345,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (14534,'中壢中原店','320桃園市中壢區中北路200號','11',253,'自行運送','2023-01-12 00:00:00',4,3,'林',568713548,1,1,1,1,1,12345,1234567891234567,1),(45347,'中壢中原店','320桃園市中壢區中北路200號','12',245,'立即送洗','2023-01-12 00:00:00',24,2,'阿明',123456789,3,3,2,2,2,23456,2345678912345678,4),(54357,'中壢中原店','320桃園市中壢區中北路200號','44',724,'立即送洗','2023-01-12 00:00:00',54,1,'YU',230112144,4,2,2,1,3,34567,3456789123456789,7);
+INSERT INTO `order` VALUES (14534,'中壢中原店','320桃園市中壢區中北路200號','11',34,'自行運送','2023-01-12 00:00:00',4,3,'林',568713548,1,1,1,1,1,12345,2345678912345678,1,12345678,1),(45347,'中壢中原店','320桃園市中壢區中北路200號','15',150,'立即送洗','2023-01-12 00:00:00',24,1,'YU',230112144,2,2,2,3,2,23456,1234567891234567,4,23456789,2),(54357,'中壢中原店','320桃園市中壢區中北路200號','17',245,'立即送洗','2023-01-12 00:00:00',56,2,'阿明',123456789,2,3,2,3,2,34567,3456789123456789,5,34567890,3);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -542,4 +544,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-13 23:12:18
+-- Dump completed on 2023-01-14  1:57:21
