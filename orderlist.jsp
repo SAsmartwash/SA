@@ -39,14 +39,15 @@
                 </a>
                 <a href="javascript:void(0)" onclick="openTab(event, 'Deliverway_se');">
                     <div class="tablink bgwhite">
-                        <p>自行外送</p>
+                        <p>自行送洗</p>
                     </div>
                 </a>
             </div>
         </div>
-        <form id="Deliverway_se" class="tab">
+        <form id="Deliverway_se" class="tab" name="orderform" method="post" action="order.jsp">
+            <input type="text" name="DeliverWay" value="自行運送" hidden>
             <div class="address">
-                <p>自行外送</p>
+                <p>自行運送</p>
                 <p>請先填好材質後，再選擇站點建立訂單</p>
             </div>
             <section>
@@ -71,7 +72,7 @@
                     mid = rs.getString("MaterialId");
                     mname = rs.getString("Material");%>
                     <div class="flex-row">
-                        <%= mid %><p><%= mname %></p><input type="radio" name="material" checked>
+                        <%= mid %><p><%= mname %></p><input type="radio" name="material" required="required" checked>
                     </div><%
                 }
                 %>
@@ -81,7 +82,7 @@
 
                     <div class="flex-sb">
                         <p>洗衣方式</p>
-                        <select type="radio">
+                        <select>
                             <%
                     sql = "SELECT * FROM  sa.washway ";
                     rs = smt.executeQuery(sql);
@@ -96,7 +97,7 @@
 
                     <div class="flex-sb">
                         <p>水溫</p>
-                        <select type="radio">
+                        <select>
 						<%
                             sql = "SELECT * FROM sa.watertemperture ";
                             rs = smt.executeQuery(sql);
@@ -110,7 +111,7 @@
 
                     <div class="flex-sb">
                         <p>烘衣</p>
-                        <select type="radio">
+                        <select>
                             <%
                     sql = "SELECT * FROM  sa.dry ";
                     rs = smt.executeQuery(sql);
@@ -138,7 +139,7 @@
                     cn = rs.getString("CreditNum");
                     cname = rs.getString("CreditName");%>
                     <div class="flex-row">
-                        <%= cn %><p><%= cname %></p><input type="radio" name="credit" checked>
+                        <%= cn %><p><%= cname %></p><input type="radio" name="credit" required="required" checked>
                     </div><%
                 }
                 %>
@@ -146,9 +147,10 @@
                 <div id="map"></div>
             </section>
         </form>
-        <form id="Deliverway_im" class="tab">
+        <form id="Deliverway_im" class="tab" name="orderform" method="post" action="order.jsp">
+            <input type="text" name="DeliverWay" value="立即送洗" hidden>
             <div class="address">
-                <p>立即外送</p>
+                <p>立即送洗</p>
                 <select name="address" class="op">
                     <%
                     sql = "SELECT * FROM sa.address ";
@@ -175,7 +177,7 @@
                     mid = rs.getString("MaterialId");
                     mname = rs.getString("Material");%>
                     <div class="flex-row">
-                        <%= mid %><p><%= mname %></p><input type="radio" name="material" checked>
+                        <%= mid %><p><%= mname %></p><input type="radio" name="material" required="required" checked>
                     </div><%
                 }
                 %>
@@ -184,7 +186,7 @@
                     <h2>推薦洗衣方式</h2>
                     <div class="flex-sb">
                         <p>洗衣方式</p>
-                        <select type="radio">
+                        <select>
                             <%
                     sql = "SELECT * FROM  sa.washway ";
                     rs = smt.executeQuery(sql);
@@ -198,7 +200,7 @@
 
                     <div class="flex-sb">
                         <p>水溫</p>
-                        <select type="radio">
+                        <select>
 						<%
                             sql = "SELECT * FROM sa.watertemperture ";
                             rs = smt.executeQuery(sql);
@@ -212,7 +214,7 @@
 
                     <div class="flex-sb">
                         <p>烘衣</p>
-                        <select type="radio">
+                        <select>
                             <%
                     sql = "SELECT * FROM  sa.dry ";
                     rs = smt.executeQuery(sql);
@@ -237,7 +239,7 @@
                     cn = rs.getString("CreditNum");
                     cname = rs.getString("CreditName");%>
                     <div class="flex-row">
-                        <%= cn %><p><%= cname %></p><input type="radio" name="credit" checked>
+                        <%= cn %><p><%= cname %></p><input type="radio" name="credit" required="required" checked>
                     </div><%
                 }
                 %>
