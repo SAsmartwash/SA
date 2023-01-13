@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `mydb` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `mydb`;
 -- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: mydb
@@ -38,6 +40,30 @@ LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
 INSERT INTO `address` VALUES (1,'320桃園市中壢區普忠路206號',230112144),(2,'320桃園市中壢區普忠路210號',123456789),(3,'320桃園市中壢區新中北路291號',123456789);
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bag`
+--
+
+DROP TABLE IF EXISTS `bag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `bag` (
+  `BagId` int NOT NULL,
+  `Status` varchar(45) NOT NULL,
+  PRIMARY KEY (`BagId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bag`
+--
+
+LOCK TABLES `bag` WRITE;
+/*!40000 ALTER TABLE `bag` DISABLE KEYS */;
+INSERT INTO `bag` VALUES (12345,'租借中'),(23456,'租借中'),(34567,'租借中'),(45678,'在店');
+/*!40000 ALTER TABLE `bag` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -289,6 +315,7 @@ CREATE TABLE `order` (
   `DryId` int NOT NULL,
   `ProcessingId` int NOT NULL,
   `MaterialId` int NOT NULL,
+  `BagId` int DEFAULT NULL,
   PRIMARY KEY (`OrderId`,`Address_AddressId`,`credit_CreditNum`,`users_Account`),
   KEY `fk_order_credit1_idx` (`credit_CreditNum`),
   KEY `fk_order_users1_idx` (`users_Account`),
@@ -297,13 +324,15 @@ CREATE TABLE `order` (
   KEY `fk_dry_Id` (`DryId`),
   KEY `fk_processing_Id` (`ProcessingId`),
   KEY `fk_material_Id` (`MaterialId`),
+  KEY `BagId` (`BagId`),
   CONSTRAINT `fk_dry_Id` FOREIGN KEY (`DryId`) REFERENCES `dry` (`DryId`),
   CONSTRAINT `fk_material_Id` FOREIGN KEY (`MaterialId`) REFERENCES `material` (`MaterialId`),
   CONSTRAINT `fk_order_credit1` FOREIGN KEY (`credit_CreditNum`) REFERENCES `credit` (`CreditNum`),
   CONSTRAINT `fk_order_users1` FOREIGN KEY (`users_Account`) REFERENCES `users` (`Account`),
   CONSTRAINT `fk_processing_Id` FOREIGN KEY (`ProcessingId`) REFERENCES `processing` (`ProcessingId`),
   CONSTRAINT `fk_washway_Id` FOREIGN KEY (`WashId`) REFERENCES `washway` (`WashId`),
-  CONSTRAINT `fk_watertemperture_Id` FOREIGN KEY (`WaterTempertureId`) REFERENCES `watertemperture` (`WaterTempertureId`)
+  CONSTRAINT `fk_watertemperture_Id` FOREIGN KEY (`WaterTempertureId`) REFERENCES `watertemperture` (`WaterTempertureId`),
+  CONSTRAINT `order_ibfk_1` FOREIGN KEY (`BagId`) REFERENCES `bag` (`BagId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=54358 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -313,7 +342,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (14534,'中壢中原店','320桃園市中壢區中北路200號','11',253,'自行運送','2023-01-12 00:00:00',4,3,11473896,'林',568713548,1,1,1,1,1),(45347,'中壢中原店','320桃園市中壢區中北路200號','12',245,'立即送洗','2023-01-12 00:00:00',24,2,11473897,'阿明',123456789,3,3,2,2,2),(54357,'中壢中原店','320桃園市中壢區中北路200號','44',724,'立即送洗','2023-01-12 00:00:00',54,1,11473854,'YU',230112144,4,2,2,1,3);
+INSERT INTO `order` VALUES (14534,'中壢中原店','320桃園市中壢區中北路200號','11',253,'自行運送','2023-01-12 00:00:00',4,3,11473896,'林',568713548,1,1,1,1,1,12345),(45347,'中壢中原店','320桃園市中壢區中北路200號','12',245,'立即送洗','2023-01-12 00:00:00',24,2,11473897,'阿明',123456789,3,3,2,2,2,23456),(54357,'中壢中原店','320桃園市中壢區中北路200號','44',724,'立即送洗','2023-01-12 00:00:00',54,1,11473854,'YU',230112144,4,2,2,1,3,34567);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -387,8 +416,10 @@ CREATE TABLE `site` (
   `SiteAddress` varchar(30) NOT NULL,
   `Phone` varchar(10) NOT NULL,
   `Favorite` varchar(1) NOT NULL,
+  `Longitude` varchar(45) NOT NULL,
+  `Latitude` varchar(45) NOT NULL,
   PRIMARY KEY (`SiteId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -397,7 +428,7 @@ CREATE TABLE `site` (
 
 LOCK TABLES `site` WRITE;
 /*!40000 ALTER TABLE `site` DISABLE KEYS */;
-INSERT INTO `site` VALUES (1,'中原中壢店','320桃園市中壢區中北路200號','032659999','T'),(2,'中壢元智店','320桃園市中壢區遠東路135號','034638800','F'),(3,'中壢中央店','320桃園市中壢區中大路300號','034227151','F'),(4,'中壢健行店','320桃園市中壢區健行路229號','034581196','F'),(5,'中壢萬能店','320桃園市中壢區萬能路1號','034515811','F');
+INSERT INTO `site` VALUES (1,'中原中壢店','320桃園市中壢區中北路200號','032659999','T','121.24053','24.95756'),(2,'中壢元智店','320桃園市中壢區遠東路135號','034638800','F','121.26342','24.97030'),(3,'中壢中央店','320桃園市中壢區中大路300號','034227151','F','121.19532','24.96810'),(4,'中壢健行店','320桃園市中壢區健行路229號','034581196','F','121.22900','24.94719'),(5,'中壢萬能店','320桃園市中壢區萬能路1號','034515811','F','121.23218','24.99032'),(6,'中壢弘揚店','320桃園市中壢區弘揚路100號','035555555','T','121.24190','24.95409'),(7,'中壢中北店','320桃園市中壢區中北路200號懷恩樓','031234967','F','121.24075','24.95754');
 /*!40000 ALTER TABLE `site` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -486,4 +517,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-13  9:00:46
+-- Dump completed on 2023-01-13 16:23:08
