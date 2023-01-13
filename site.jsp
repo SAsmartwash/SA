@@ -1,5 +1,5 @@
 ﻿<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page language="java" import="java.sql.*"%>
+<%@page language="java" import="java.sql.*, java.util.*, java.text.*"%>
 <%@include file="config.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +7,7 @@
 <head>
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/c5f2e8b9cc.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- vue -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <!-- JQuery -->
@@ -37,36 +38,53 @@
             <h2>查找站點</h2>
         </div>
         <section>
-            <h2>最近站點</h2>
-            <div class="site">
-                <h2>劉老教授智慧喜 中壢中原店</h2>
-                <div class="address">
-                    <p>桃園市中壢區弘揚路100號<br>
-                        03-5555555</p>
-                </div>
-            </div>
+            <h2>最愛站點</h2>
+            <%
+sql = "SELECT * FROM site where favorite = 1 ";
+rs = smt.executeQuery(sql);
+String sid = "";
+String name = "";
+String address = "";
+String phone = "";
+int favorite = 0;
+while (rs.next()) {
+sid = rs.getString("SiteId");
+name = rs.getString("SiteName");
+address = rs.getString("SiteAddress");
+phone = rs.getString("Phone");
+favorite = rs.getInt("Favorite");
+out.println("<div class='site'>");
+out.println("<h2>"+rs.getString("SiteName")+"</h2>");%>
+            <button class="favorite-button" data-site-id="<%= sid %>" data-is-added="<%= favorite %>">
+                <i class="fa fa-heart"></i>
+            </button>
+            <%
+out.println("<p>"+rs.getString("SiteAddress")+"<br>"+rs.getString("Phone")+"</p>");
+out.println("</div>");
+}
+%>
         </section>
         <section>
             <h2>其他站點</h2>
             <%					
-					sql = "SELECT * FROM site" ;
+					sql = "SELECT * FROM site where favorite = '0' ";
 					rs = smt.executeQuery(sql);
-					String sid = "";
-					String name = "";
-					String address = "";
-					String phone = "";
-					String favorite = "";
+					
 
-						while (rs.next()) {
-						sid = rs.getString("SiteId");
-						name = rs.getString("SiteName");
-						address = rs.getString("SiteAddress");
-						phone = rs.getString("Phone");
-						favorite = rs.getString("Favorite");
-						out.println("<div class='site'>");
-						out.println("<h2>"+rs.getString("SiteName")+"</h2>");
-						out.println("<p>"+rs.getString("SiteAddress")+"<br>"+rs.getString("Phone")+"</p>");
-				        out.println("</div>");
+                    while (rs.next()) {
+                        sid = rs.getString("SiteId");
+                        name = rs.getString("SiteName");
+                        address = rs.getString("SiteAddress");
+                        phone = rs.getString("Phone");
+                        favorite = rs.getInt("Favorite");
+                        out.println("<div class='site'>");
+                        out.println("<h2>"+rs.getString("SiteName")+"</h2>");%>
+            <button class="favorite-button" data-site-id="<%= sid %>" data-is-added="<%= favorite %>">
+                <i class="fa fa-heart-o"></i>
+            </button>
+            <%
+                        out.println("<p>"+rs.getString("SiteAddress")+"<br>"+rs.getString("Phone")+"</p>");
+                        out.println("</div>");
 }
 %>
         </section>
@@ -136,6 +154,29 @@
         document.getElementById("openMap").style.display = "block";
         map.invalidateSize();
     }
+</script>
+<script>
+    $(document).ready(function () {
+        $('.favorite-button').click(function () {
+            var siteId = $(this).data('siteId');
+            var favorite = $(this).data('is-added');
+            $.ajax({
+                type: 'POST',
+                url: 'update_favorite.jsp',
+                data: {
+                    siteId: siteId,
+                    favorite: favorite
+                },
+                success: function (response) {
+                    $(this).data('is-added', !favorite);
+                    $(this).find('i').toggleClass('fa-heart fa-heart-o');
+                }.bind(this),
+                error: function (xhr, status, error) {
+                    console.log('Error updating favorites: ' + error);
+                }
+            });
+        });
+    });
 </script>
 <%
 con.close();

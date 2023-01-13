@@ -238,7 +238,21 @@
         evt.currentTarget.firstElementChild.className += " bg";
     }
 
-
+    $(document).ready(function () {
+        setInterval(function () {
+            $.ajax({
+                type: 'POST',
+                url: 'updateDatabase.jsp',
+                data: {},
+                success: function (response) {
+                    console.log('Database updated successfully');
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error updating database: ' + error);
+                }
+            });
+        }, 60000); // repeat every 60 seconds
+    });
 </script>
 
 </html>
