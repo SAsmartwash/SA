@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page language="java" import="java.sql.*"%>
+<%@page language="java" import="java.sql.*, java.util.*, java.text.*"%>
 <%@include file="config.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,24 +28,24 @@
 <body>
     <%
     String Status =request.getParameter("Status");
-    Integer BagId = Integer.parseInt(request.getParameter("BagId"));
+    int BagId = Integer.parseInt(request.getParameter("BagId"));
     String SiteName =request.getParameter("SiteName");
     String DeliverWay =request.getParameter("DeliverWay");
-    Integer aid = Integer.parseInt(request.getParameter("aid"));
+    int aid = Integer.parseInt(request.getParameter("aid"));
     String address = request.getParameter("address");
-    Integer mid = Integer.parseInt(request.getParameter("mid"));
+    int mid = Integer.parseInt(request.getParameter("mid"));
     String mname = request.getParameter("mname");
-    Integer tid = Integer.parseInt(request.getParameter("tid"));
+    int tid = Integer.parseInt(request.getParameter("tid"));
     String tname = request.getParameter("tname");
-    Integer wid = Integer.parseInt(request.getParameter("wid"));
+    int wid = Integer.parseInt(request.getParameter("wid"));
     String wname = request.getParameter("wname");
-    Integer did = Integer.parseInt(request.getParameter("did"));
+    int did = Integer.parseInt(request.getParameter("did"));
     String dname = request.getParameter("dname");
-    Integer cn = Integer.parseInt(request.getParameter("cn"));
+    int cn = Integer.parseInt(request.getParameter("cn"));
     String cname = request.getParameter("cname");
-    sql = "UPDATE bag SET `Status` =  Status where `BagId` = BagId ";
+    sql = "UPDATE `bag` SET `Status` =  Status where `BagId` = BagId ";
     con.createStatement().executeUpdate(sql);
-    sql = "INSERT INTO `order` (BagId, SiteName, DeliverWay, Address_AddressId, Address, MaterialId, WaterTempertureId, WashId, DryId, CreditNum)VALUES('"+ BagId +"' ,'" + SiteName + "','" + DeliverWay + "','" + aid + "', '" + address + "', '" + mid + "', '" + tid + "', '" + wid + "', '" + did + "', '" + cn + "')";
+    sql = "INSERT INTO `order` (`BagId`, `SiteName`, `DeliverWay`, `Address_AddressId`, `Address`, `MaterialId`, `WaterTempertureId`, `WashId`, `DryId`, `CreditNum`)VALUES('"+BagId+"','"+SiteName+"','"+DeliverWay+"','"+aid+"', '"+address+"','"+mid+"','"+tid+"','"+wid+"','"+did+"','"+cn+"')";
     con.createStatement().executeUpdate(sql);
     %>
     <script>

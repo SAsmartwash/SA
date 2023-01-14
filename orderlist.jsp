@@ -1,5 +1,5 @@
 ﻿<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page language="java" import="java.sql.*"%>
+<%@page language="java" import="java.sql.*, java.util.*, java.text.*"%>
 <%@include file="config.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -249,7 +249,7 @@
                 <div class="or1">
                     <h2>付款方式</h2>
                     <%
-                    sql = "SELECT * FROM  sa.credit;
+                    sql = "SELECT * FROM  sa.credit";
                     rs = smt.executeQuery(sql);
                     
                     while (rs.next()) {
